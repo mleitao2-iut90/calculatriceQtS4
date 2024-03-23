@@ -52,11 +52,13 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../calculactriceQtS4/main.cpp \
-		../calculactriceQtS4/mainwindow.cpp qrc_qmake_qmake_qm_files.cpp \
+SOURCES       = ../calculactriceQtS4/src/main.cpp \
+		../calculactriceQtS4/src/mainwindow.cpp qrc_resources.cpp \
+		qrc_qmake_qmake_qm_files.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_resources.o \
 		qrc_qmake_qmake_qm_files.o \
 		moc_mainwindow.o
 DIST          = ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -193,6 +195,7 @@ DIST          = ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_pre.prf
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_post.prf \
+		../calculactriceQtS4/.qmake.stash \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -215,8 +218,8 @@ DIST          = ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_pre.prf
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/exceptions.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/yacc.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/lex.prf \
-		../calculactriceQtS4/calculactriceQtS4.pro ../calculactriceQtS4/mainwindow.h ../calculactriceQtS4/main.cpp \
-		../calculactriceQtS4/mainwindow.cpp
+		../calculactriceQtS4/calculactriceQtS4.pro ../calculactriceQtS4/headers/mainwindow.h ../calculactriceQtS4/src/main.cpp \
+		../calculactriceQtS4/src/mainwindow.cpp
 QMAKE_TARGET  = calculactriceQtS4
 DESTDIR       = 
 TARGET        = calculactriceQtS4
@@ -362,6 +365,7 @@ Makefile: ../calculactriceQtS4/calculactriceQtS4.pro ../../../../QtCreator/6.6.2
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -385,6 +389,7 @@ Makefile: ../calculactriceQtS4/calculactriceQtS4.pro ../../../../QtCreator/6.6.2
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/yacc.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/lex.prf \
 		../calculactriceQtS4/calculactriceQtS4.pro \
+		../calculactriceQtS4/resources/resources.qrc \
 		qmake_qmake_qm_files.qrc \
 		../../../../QtCreator/6.6.2/gcc_64/lib/libQt6Widgets.prl \
 		../../../../QtCreator/6.6.2/gcc_64/lib/libQt6Gui.prl \
@@ -524,6 +529,7 @@ Makefile: ../calculactriceQtS4/calculactriceQtS4.pro ../../../../QtCreator/6.6.2
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -547,6 +553,7 @@ Makefile: ../calculactriceQtS4/calculactriceQtS4.pro ../../../../QtCreator/6.6.2
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/yacc.prf:
 ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/lex.prf:
 ../calculactriceQtS4/calculactriceQtS4.pro:
+../calculactriceQtS4/resources/resources.qrc:
 qmake_qmake_qm_files.qrc:
 ../../../../QtCreator/6.6.2/gcc_64/lib/libQt6Widgets.prl:
 ../../../../QtCreator/6.6.2/gcc_64/lib/libQt6Gui.prl:
@@ -566,11 +573,11 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts $(DISTDIR)/
-	$(COPY_FILE) --parents qmake_qmake_qm_files.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../calculactriceQtS4/resources/resources.qrc qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../calculactriceQtS4/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../calculactriceQtS4/main.cpp ../calculactriceQtS4/mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../calculactriceQtS4/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../calculactriceQtS4/headers/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../calculactriceQtS4/src/main.cpp ../calculactriceQtS4/src/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../calculactriceQtS4/ui/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts $(DISTDIR)/
 
 
@@ -601,9 +608,13 @@ compiler_lrelease_clean:
 .qm/calculactriceQtS4_fr_FR.qm: ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts
 	/media/leitao/Data/QtCreator/6.6.2/gcc_64/bin/lrelease ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts -qm .qm/calculactriceQtS4_fr_FR.qm
 
-compiler_rcc_make_all: qrc_qmake_qmake_qm_files.cpp
+compiler_rcc_make_all: qrc_resources.cpp qrc_qmake_qmake_qm_files.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_qmake_qmake_qm_files.cpp
+	-$(DEL_FILE) qrc_resources.cpp qrc_qmake_qmake_qm_files.cpp
+qrc_resources.cpp: ../calculactriceQtS4/resources/resources.qrc \
+		../../../../QtCreator/6.6.2/gcc_64/libexec/rcc
+	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/rcc -name resources ../calculactriceQtS4/resources/resources.qrc -o qrc_resources.cpp
+
 qrc_qmake_qmake_qm_files.cpp: qmake_qmake_qm_files.qrc \
 		../../../../QtCreator/6.6.2/gcc_64/libexec/rcc \
 		.qm/calculactriceQtS4_fr_FR.qm
@@ -618,7 +629,7 @@ moc_predefs.h: ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/data/dummy.cp
 compiler_moc_header_make_all: moc_mainwindow.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp
-moc_mainwindow.cpp: ../calculactriceQtS4/mainwindow.h \
+moc_mainwindow.cpp: ../calculactriceQtS4/headers/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -784,7 +795,7 @@ moc_mainwindow.cpp: ../calculactriceQtS4/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		moc_predefs.h \
 		../../../../QtCreator/6.6.2/gcc_64/libexec/moc
-	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/build-calculactriceQtS4-Desktop_Qt_6_6_2_GCC_64bit-Debug/moc_predefs.h -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/mkspecs/linux-g++ -I/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4 -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtWidgets -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtGui -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../calculactriceQtS4/mainwindow.h -o moc_mainwindow.cpp
+	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/build-calculactriceQtS4-Desktop_Qt_6_6_2_GCC_64bit-Debug/moc_predefs.h -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/mkspecs/linux-g++ -I/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4 -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtWidgets -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtGui -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../calculactriceQtS4/headers/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -793,9 +804,9 @@ compiler_moc_source_clean:
 compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../calculactriceQtS4/mainwindow.ui \
+ui_mainwindow.h: ../calculactriceQtS4/ui/mainwindow.ui \
 		../../../../QtCreator/6.6.2/gcc_64/libexec/uic
-	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/uic ../calculactriceQtS4/mainwindow.ui -o ui_mainwindow.h
+	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/uic ../calculactriceQtS4/ui/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -807,7 +818,7 @@ compiler_clean: compiler_lrelease_clean compiler_rcc_clean compiler_moc_predefs_
 
 ####### Compile
 
-main.o: ../calculactriceQtS4/main.cpp ../calculactriceQtS4/mainwindow.h \
+main.o: ../calculactriceQtS4/src/main.cpp ../calculactriceQtS4/headers/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -996,9 +1007,9 @@ main.o: ../calculactriceQtS4/main.cpp ../calculactriceQtS4/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/QLocale \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/QTranslator \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qtranslator.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../calculactriceQtS4/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../calculactriceQtS4/src/main.cpp
 
-mainwindow.o: ../calculactriceQtS4/mainwindow.cpp ../calculactriceQtS4/mainwindow.h \
+mainwindow.o: ../calculactriceQtS4/src/mainwindow.cpp ../calculactriceQtS4/headers/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
@@ -1162,8 +1173,40 @@ mainwindow.o: ../calculactriceQtS4/mainwindow.cpp ../calculactriceQtS4/mainwindo
 		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/QTransform \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qnativeinterface.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
-		ui_mainwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../calculactriceQtS4/mainwindow.cpp
+		ui_mainwindow.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/QVariant \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QApplication \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qcoreapplication_platform.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qfuture.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qmutex.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qtsan_impl.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qresultstore.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qfuture_impl.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qthreadpool.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qthread.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qrunnable.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qexception.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qpromise.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qlocale.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QWidget
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../calculactriceQtS4/src/mainwindow.cpp
+
+qrc_resources.o: qrc_resources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
 qrc_qmake_qmake_qm_files.o: qrc_qmake_qmake_qm_files.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qmake_qmake_qm_files.o qrc_qmake_qmake_qm_files.cpp
