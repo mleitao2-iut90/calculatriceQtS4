@@ -218,7 +218,8 @@ DIST          = ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/spec_pre.prf
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/exceptions.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/yacc.prf \
 		../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/lex.prf \
-		../calculactriceQtS4/calculactriceQtS4.pro ../calculactriceQtS4/headers/mainwindow.h ../calculactriceQtS4/src/main.cpp \
+		../calculactriceQtS4/calculactriceQtS4.pro ../calculactriceQtS4/headers/mainwindow.h \
+		../calculactriceQtS4/headers/muparser/include/muParser.h ../calculactriceQtS4/src/main.cpp \
 		../calculactriceQtS4/src/mainwindow.cpp
 QMAKE_TARGET  = calculactriceQtS4
 DESTDIR       = 
@@ -575,7 +576,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/resources/resources.qrc qmake_qmake_qm_files.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../QtCreator/6.6.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../calculactriceQtS4/headers/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../calculactriceQtS4/headers/mainwindow.h ../calculactriceQtS4/headers/muparser/include/muParser.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/src/main.cpp ../calculactriceQtS4/src/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/ui/mainwindow.ui $(DISTDIR)/
 	$(COPY_FILE) --parents ../calculactriceQtS4/calculactriceQtS4_fr_FR.ts $(DISTDIR)/
@@ -1197,11 +1198,24 @@ mainwindow.o: ../calculactriceQtS4/src/mainwindow.cpp ../calculactriceQtS4/heade
 		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qinputmethod.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtCore/qlocale.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qguiapplication_platform.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QGridLayout \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QLabel \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qframe.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qpicture.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtGui/qtextdocument.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QMenuBar \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmenubar.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qmenu.h \
-		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QStatusBar \
-		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QPushButton \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QTabWidget \
+		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QVBoxLayout \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../calculactriceQtS4/src/mainwindow.cpp
 

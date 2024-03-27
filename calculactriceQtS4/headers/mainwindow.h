@@ -1,5 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include <string>
+
+using namespace std;
 
 #include <QMainWindow>
 
@@ -17,7 +20,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
+private slots:
+    void onPushButtonOClicked(const QString& buttonText);
+
+
 private:
     Ui::MainWindow *ui;
 };
+
+int evaluateExpression(string tokens);
 #endif // MAINWINDOW_H

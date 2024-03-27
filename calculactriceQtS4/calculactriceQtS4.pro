@@ -13,7 +13,9 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
-    headers/mainwindow.h
+    headers/mainwindow.h \
+    headers/muparser/include/muParser.h
+
 
 FORMS += \
     ui/mainwindow.ui
