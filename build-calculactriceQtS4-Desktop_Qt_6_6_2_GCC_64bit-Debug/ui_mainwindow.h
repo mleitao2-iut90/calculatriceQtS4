@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.6.2
+** Created by: Qt User Interface Compiler version 6.6.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -273,25 +273,82 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton8->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton8->setShortcut(QCoreApplication::translate("MainWindow", "8", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton5->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton5->setShortcut(QCoreApplication::translate("MainWindow", "5", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonParentheseFermante->setText(QCoreApplication::translate("MainWindow", ")", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonParentheseFermante->setShortcut(QCoreApplication::translate("MainWindow", ")", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonC->setText(QCoreApplication::translate("MainWindow", "C", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonC->setShortcut(QCoreApplication::translate("MainWindow", "Shift+C", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonDivise->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonDivise->setShortcut(QCoreApplication::translate("MainWindow", "/", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton1->setShortcut(QCoreApplication::translate("MainWindow", "1", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton4->setShortcut(QCoreApplication::translate("MainWindow", "4", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonParentheseOuvrante->setText(QCoreApplication::translate("MainWindow", "(", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonParentheseOuvrante->setShortcut(QCoreApplication::translate("MainWindow", "(", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton2->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton2->setShortcut(QCoreApplication::translate("MainWindow", "2", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton7->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton7->setShortcut(QCoreApplication::translate("MainWindow", "7", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonExp->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
         pushButton0->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton0->setShortcut(QCoreApplication::translate("MainWindow", "0", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton6->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton6->setShortcut(QCoreApplication::translate("MainWindow", "6", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton9->setText(QCoreApplication::translate("MainWindow", "9", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton9->setShortcut(QCoreApplication::translate("MainWindow", "9", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonFois->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonFois->setShortcut(QCoreApplication::translate("MainWindow", "*", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonMoins->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonMoins->setShortcut(QCoreApplication::translate("MainWindow", "-", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonPlus->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonPlus->setShortcut(QCoreApplication::translate("MainWindow", "+", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton3->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButton3->setShortcut(QCoreApplication::translate("MainWindow", "3", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonVirgule->setText(QCoreApplication::translate("MainWindow", ".", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonVirgule->setShortcut(QCoreApplication::translate("MainWindow", ".", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButtonEgale->setText(QCoreApplication::translate("MainWindow", "=", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonEgale->setShortcut(QCoreApplication::translate("MainWindow", "Return", nullptr));
+#endif // QT_CONFIG(shortcut)
         LabelCalcul->setText(QString());
         LabelResult->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
