@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I../calculactriceQtS4 -I. -I../../../../QtCreator/6.6.2/gcc_64/include -I../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets -I../../../../QtCreator/6.6.2/gcc_64/include/QtGui -I../../../../QtCreator/6.6.2/gcc_64/include/QtCore -I. -I. -I../../../../QtCreator/6.6.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../calculactriceQtS4 -I. -I../calculactriceQtS4/headers/muparser -I../../../../QtCreator/6.6.2/gcc_64/include -I../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets -I../../../../QtCreator/6.6.2/gcc_64/include/QtGui -I../../../../QtCreator/6.6.2/gcc_64/include/QtCore -I. -I. -I../../../../QtCreator/6.6.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /media/leitao/Data/QtCreator/6.6.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = calculactriceQtS41.0.0
 DISTDIR = /media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/build-calculactriceQtS4-Desktop_Qt_6_6_2_GCC_64bit-Debug/.tmp/calculactriceQtS41.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/media/leitao/Data/QtCreator/6.6.2/gcc_64/lib -Wl,-rpath-link,/media/leitao/Data/QtCreator/6.6.2/gcc_64/lib
-LIBS          = $(SUBLIBS) /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Widgets.so /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Gui.so /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Core.so -lpthread -lGL   
+LIBS          = $(SUBLIBS) -L/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4/headers/muparser/ -lmuparser /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Widgets.so /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Gui.so /media/leitao/Data/QtCreator/6.6.2/gcc_64/lib/libQt6Core.so -lpthread -lGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -796,7 +796,7 @@ moc_mainwindow.cpp: ../calculactriceQtS4/headers/mainwindow.h \
 		../../../../QtCreator/6.6.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		moc_predefs.h \
 		../../../../QtCreator/6.6.2/gcc_64/libexec/moc
-	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/build-calculactriceQtS4-Desktop_Qt_6_6_2_GCC_64bit-Debug/moc_predefs.h -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/mkspecs/linux-g++ -I/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4 -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtWidgets -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtGui -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../calculactriceQtS4/headers/mainwindow.h -o moc_mainwindow.cpp
+	/media/leitao/Data/QtCreator/6.6.2/gcc_64/libexec/moc $(DEFINES) --include /media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/build-calculactriceQtS4-Desktop_Qt_6_6_2_GCC_64bit-Debug/moc_predefs.h -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/mkspecs/linux-g++ -I/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4 -I/media/leitao/Data/Qt/projetCalculatrice/calculatriceQtS4/calculactriceQtS4/headers/muparser -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtWidgets -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtGui -I/media/leitao/Data/QtCreator/6.6.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../calculactriceQtS4/headers/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:

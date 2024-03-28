@@ -1,6 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include <string>
 
 using namespace std;
 
@@ -30,5 +29,6 @@ private:
     Ui::MainWindow *ui;
 };
 
-int evaluateExpression(string tokens);
+bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere);
+
 #endif // MAINWINDOW_H

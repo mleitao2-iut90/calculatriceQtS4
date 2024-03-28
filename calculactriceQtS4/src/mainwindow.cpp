@@ -1,8 +1,9 @@
 #include "headers/mainwindow.h"
 #include "ui_mainwindow.h"
+#include "muParser.h"
 #include <iostream>
-#include <string>
-#include <stack>
+#include <QRegularExpression>
+#include <QString>
 
 using namespace std;
 
@@ -87,122 +88,67 @@ MainWindow::~MainWindow()
 void MainWindow::onPushButtonOClicked(const QString& buttonText)
 {
     QString currentText = ui->LabelCalcul->text();
-    bool isNumber;
-    int number = buttonText.toInt(&isNumber);
-
-    if (isNumber && number >= 0 && number <= 9) {
-        currentText += buttonText;
+    QString resultText = ui->LabelResult->text();
+    if (buttonText == "C") {
+        currentText.clear();
+        resultText.clear();
+    } else if (buttonText == "Exp") {
+       std::cout << "Salut" << std::endl;
+    } else if (buttonText == "=") {
+        mu::Parser parser;
+        parser.SetExpr(currentText.toStdString());
+        try {
+            double result = parser.Eval();
+            std::cout << "Le résultat de l'expression est : " << result << std::endl;
+            resultText = QString::number(result);
+        } catch (mu::Parser::exception_type &e) {
+            std::cout << "Erreur lors de l'évaluation de l'expression : " << e.GetMsg() << std::endl;
+            resultText = "Erreur";
+        }
     } else {
-        if (buttonText == "C") {
-            currentText.clear();
-        } else if (buttonText == "Exp") {
-            printf("salut");
-        } else if (buttonText == "+" || buttonText == "-" || buttonText == "x" || buttonText == "(" || buttonText == ")") {
-            QChar lastChar = currentText.right(1).at(0);
-
-            currentText += buttonText;
-        } else if (buttonText == "=") {
-            cout << "Result: " << evaluateExpression("15+ 10*3/(6+9)") << endl;
-        } else if(buttonText == "÷"){
-            QChar lastChar = currentText.right(1).at(0);
-            if(lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/'){
-                return;
-            }
-
-            if((buttonText == "x" || buttonText == "÷") && lastChar == '(' ){
-                return;
-            }
-
-            if((buttonText == "(" || buttonText == ")") && !(lastChar == '+' || lastChar == '-' || lastChar == 'x' || lastChar == '/')){
-                return;
-            }
-            currentText += "/";
+        if(peutAjouterCaractere(currentText, buttonText)) {
+            currentText +=  buttonText;
         }
     }
 
+    ui->LabelResult->setText(resultText);
     ui->LabelCalcul->setText(currentText);
 }
 
-int precedence(char op) {
-    if(op == '+' || op == '-')
-        return 1;
-    if(op == '*' || op == '/')
-        return 2;
-    return 0;
-}
-
-int applyOp(int a, int b, char op) {
-    switch(op) {
-    case '+': return a + b;
-    case '-': return a - b;
-    case '*': return a * b;
-    case '/': return a / b;
-    }
-    return 0;
-}
-
-int evaluateExpression(string tokens) {
-    stack<int> values;
-    stack<char> ops;
-
-    for(size_t i = 0; i < tokens.length(); i++) {
-        if(tokens[i] == ' ')
-            continue;
-
-        if(tokens[i] == '(') {
-            ops.push(tokens[i]);
-        } else if(isdigit(tokens[i])) {
-            int val = 0;
-            while(i < tokens.length() && isdigit(tokens[i])) {
-                val = (val * 10) + (tokens[i] - '0');
-                i++;
-            }
-            values.push(val);
-            i--;
-        } else if(tokens[i] == ')') {
-            while(!ops.empty() && ops.top() != '(') {
-                int val2 = values.top();
-                values.pop();
-
-                int val1 = values.top();
-                values.pop();
-
-                char op = ops.top();
-                ops.pop();
-
-                values.push(applyOp(val1, val2, op));
-            }
-            if(!ops.empty())
-                ops.pop();
-        } else {
-            while(!ops.empty() && precedence(ops.top()) >= precedence(tokens[i])) {
-                int val2 = values.top();
-                values.pop();
-
-                int val1 = values.top();
-                values.pop();
-
-                char op = ops.top();
-                ops.pop();
-
-                values.push(applyOp(val1, val2, op));
-            }
-            ops.push(tokens[i]);
-        }
+bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere) {
+    // Vérifier que le prochain caractère est valide
+    QRegularExpression re("^[-+/*().0-9]+$");
+    if (!re.match(prochainCaractere).hasMatch()) {
+        return false;
     }
 
-    while(!ops.empty()) {
-        int val2 = values.top();
-        values.pop();
-
-        int val1 = values.top();
-        values.pop();
-
-        char op = ops.top();
-        ops.pop();
-
-        values.push(applyOp(val1, val2, op));
+    // Si l'expression est vide, le prochain caractère peut être un chiffre, une parenthèse ouvrante ou un signe moins
+    if (expression.isEmpty()) {
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(" || prochainCaractere == "-";
     }
 
-    return values.top();
+    // Vérifier que le prochain caractère peut être ajouté à l'expression en fonction du dernier caractère de l'expression
+    QString dernierCaractere = expression.right(1);
+    if (dernierCaractere == "+" || dernierCaractere == "-") {
+        // Si le dernier caractère est un signe plus ou moins, le prochain caractère doit être un chiffre ou une parenthèse ouvrante
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(";
+    } else if (dernierCaractere == "*" || dernierCaractere == "/") {
+        // Si le dernier caractère est un signe de multiplication ou de division, le prochain caractère doit être un chiffre ou une parenthèse ouvrante
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(";
+    } else if (dernierCaractere == ".") {
+        // Si le dernier caractère est un point décimal, le prochain caractère doit être un chiffre
+        return prochainCaractere.at(0).isDigit();
+    } else if (dernierCaractere == "(") {
+        // Si le dernier caractère est une parenthèse ouvrante, le prochain caractère peut être un chiffre ou un signe moins
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "-" || prochainCaractere == "(";
+    } else if (dernierCaractere == ")") {
+        // Si le dernier caractère est une parenthèse fermante, le prochain caractère doit être un opérateur
+        return prochainCaractere == "+" || prochainCaractere == "-" ||
+               prochainCaractere == "*" || prochainCaractere == "/" || prochainCaractere == ")";
+    } else {
+        // Si le dernier caractère est un chiffre, le prochain caractère peut être un opérateur, une parenthèse ou un point décimal
+        return prochainCaractere == "+" || prochainCaractere == "-" ||
+               prochainCaractere == "*" || prochainCaractere == "/" ||
+               prochainCaractere == "." || prochainCaractere.at(0).isDigit() || prochainCaractere == ")";
+    }
 }

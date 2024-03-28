@@ -276,7 +276,7 @@ public:
         pushButton5->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
         pushButtonParentheseFermante->setText(QCoreApplication::translate("MainWindow", ")", nullptr));
         pushButtonC->setText(QCoreApplication::translate("MainWindow", "C", nullptr));
-        pushButtonDivise->setText(QCoreApplication::translate("MainWindow", "\303\267", nullptr));
+        pushButtonDivise->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         pushButton1->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
         pushButton4->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
         pushButtonParentheseOuvrante->setText(QCoreApplication::translate("MainWindow", "(", nullptr));
@@ -286,7 +286,7 @@ public:
         pushButton0->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         pushButton6->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
         pushButton9->setText(QCoreApplication::translate("MainWindow", "9", nullptr));
-        pushButtonFois->setText(QCoreApplication::translate("MainWindow", "x", nullptr));
+        pushButtonFois->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
         pushButtonMoins->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         pushButtonPlus->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton3->setText(QCoreApplication::translate("MainWindow", "3", nullptr));

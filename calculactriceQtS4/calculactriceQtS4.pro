@@ -32,3 +32,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources/resources.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/headers/muparser/release/ -lmuparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/headers/muparser/debug/ -lmuparser
+else:unix:!macx: LIBS += -L$$PWD/headers/muparser/ -lmuparser
+
+INCLUDEPATH += $$PWD/headers/muparser
+DEPENDPATH += $$PWD/headers/muparser
