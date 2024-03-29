@@ -20,8 +20,6 @@ HEADERS += \
 FORMS += \
     ui/mainwindow.ui
 
-TRANSLATIONS += \
-    calculactriceQtS4_fr_FR.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 

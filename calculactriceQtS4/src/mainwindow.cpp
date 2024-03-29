@@ -14,8 +14,6 @@
 
 using namespace std;
 
-//#include "headers/muparser/include/muParser.h"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
