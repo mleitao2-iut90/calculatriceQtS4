@@ -392,7 +392,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         pushButtonSqrt->setDefault(false);
 
 
@@ -497,8 +497,8 @@ public:
 #endif // QT_CONFIG(shortcut)
         LabelCalcul->setText(QString());
         LabelResult->setText(QString());
-        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Calculatrice", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Historique", nullptr));
     } // retranslateUi
 
 };
