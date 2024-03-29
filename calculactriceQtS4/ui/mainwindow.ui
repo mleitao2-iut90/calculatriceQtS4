@@ -594,6 +594,20 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
+         <widget class="QPushButton" name="pushButtonExportHistori">
+          <property name="text">
+           <string>Export Historique</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonDelete">
+          <property name="text">
+           <string>Supprimer l'historique</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QScrollArea" name="scrollArea">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -619,7 +633,7 @@
              <x>0</x>
              <y>0</y>
              <width>410</width>
-             <height>509</height>
+             <height>447</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_4">

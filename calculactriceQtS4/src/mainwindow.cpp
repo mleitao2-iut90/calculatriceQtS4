@@ -126,11 +126,50 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButtonDel1, &QPushButton::clicked, this, [=](){
         onPushButtonOClicked(ui->pushButtonDel1->text());
     });
+
+    connect(ui->pushButtonExportHistori, &QPushButton::clicked, this, [=](){
+        onPushButtonExportClicked();
+    });
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onPushButtonExportClicked() {
+
+    //std::vector<std::string> historique = {"ligne 1", "ligne 2", "ligne 3"}; // exemple d'historique
+
+    // demander à l'utilisateur de sélectionner un répertoire où enregistrer l'historique
+    QString cheminRepertoire = QFileDialog::getExistingDirectory(this, tr("Enregistrer l'historique"), QString(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    // vérifier que l'utilisateur a sélectionné un répertoire
+    if (!cheminRepertoire.isEmpty()) {
+        // demander à l'utilisateur de saisir le nom du fichier
+        bool ok;
+        QString nomFichier = QInputDialog::getText(this, tr("Enregistrer l'historique"), tr("Nom du fichier :"), QLineEdit::Normal, QString(), &ok);
+
+        // vérifier que l'utilisateur a saisi un nom de fichier valide
+        if (ok && !nomFichier.isEmpty()) {
+            // créer un objet ofstream pour écrire dans le fichier
+            std::string cheminFichier = cheminRepertoire.toStdString() + "/" + nomFichier.toStdString() + ".txt";
+            std::ofstream fichier(cheminFichier, std::ios_base::app);
+
+            // vérifier que le fichier est ouvert
+            if (fichier.is_open()) {
+                // écrire les données de l'historique dans le fichier
+                for (const auto& ligne : HistoriqueTab) {
+                    fichier << ligne.toStdString() << std::endl;
+                }
+
+                // fermer le fichier
+                fichier.close();
+            } else {
+                std::cerr << "Impossible d'ouvrir le fichier en écriture." << std::endl;
+            }
+        }
+    }
 }
 
 // Définissez le slot pour gérer le clic sur le bouton
@@ -168,37 +207,10 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
             resultText = "Erreur";
         }
 
-        /*std::vector<std::string> historique = {"ligne 1", "ligne 2", "ligne 3"}; // exemple d'historique
-
-        // demander à l'utilisateur de sélectionner un répertoire où enregistrer l'historique
-        QString cheminRepertoire = QFileDialog::getExistingDirectory(this, tr("Enregistrer l'historique"), QString(), QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-        // vérifier que l'utilisateur a sélectionné un répertoire
-        if (!cheminRepertoire.isEmpty()) {
-            // demander à l'utilisateur de saisir le nom du fichier
-            bool ok;
-            QString nomFichier = QInputDialog::getText(this, tr("Enregistrer l'historique"), tr("Nom du fichier :"), QLineEdit::Normal, QString(), &ok);
-
-            // vérifier que l'utilisateur a saisi un nom de fichier valide
-            if (ok && !nomFichier.isEmpty()) {
-                // créer un objet ofstream pour écrire dans le fichier
-                std::string cheminFichier = cheminRepertoire.toStdString() + "/" + nomFichier.toStdString() + ".txt";
-                std::ofstream fichier(cheminFichier, std::ios_base::app);
-
-                // vérifier que le fichier est ouvert
-                if (fichier.is_open()) {
-                    // écrire les données de l'historique dans le fichier
-                    for (const auto& ligne : historique) {
-                        fichier << ligne << std::endl;
-                    }
-
-                    // fermer le fichier
-                    fichier.close();
-                } else {
-                    std::cerr << "Impossible d'ouvrir le fichier en écriture." << std::endl;
-                }
-            }
-        }*/
+        HistoriqueTab.append({currentText,"=> "+resultText+"\n"});
+        // for (const QString &str : HistoriqueTab) {
+        //     std::cout << str.toStdString() << std::endl;
+        // }
     } else if(buttonText == "<=") {
         if(!currentText.isEmpty()) {
             currentText.chop(1);

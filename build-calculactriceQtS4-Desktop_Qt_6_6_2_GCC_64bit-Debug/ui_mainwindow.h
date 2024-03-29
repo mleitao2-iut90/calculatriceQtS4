@@ -68,10 +68,13 @@ public:
     QLabel *LabelResult;
     QWidget *tab_2;
     QVBoxLayout *verticalLayout_2;
+    QPushButton *pushButtonExportHistori;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QVBoxLayout *verticalLayout_4;
     QSpacerItem *verticalSpacer;
+    QLabel *label;
+    QLabel *label_2;
     QMenuBar *menubar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -357,6 +360,11 @@ public:
         tab_2->setObjectName("tab_2");
         verticalLayout_2 = new QVBoxLayout(tab_2);
         verticalLayout_2->setObjectName("verticalLayout_2");
+        pushButtonExportHistori = new QPushButton(tab_2);
+        pushButtonExportHistori->setObjectName("pushButtonExportHistori");
+
+        verticalLayout_2->addWidget(pushButtonExportHistori);
+
         scrollArea = new QScrollArea(tab_2);
         scrollArea->setObjectName("scrollArea");
         QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
@@ -369,12 +377,22 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName("scrollAreaWidgetContents");
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 410, 509));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 410, 478));
         verticalLayout_4 = new QVBoxLayout(scrollAreaWidgetContents);
         verticalLayout_4->setObjectName("verticalLayout_4");
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         verticalLayout_4->addItem(verticalSpacer);
+
+        label = new QLabel(scrollAreaWidgetContents);
+        label->setObjectName("label");
+
+        verticalLayout_4->addWidget(label);
+
+        label_2 = new QLabel(scrollAreaWidgetContents);
+        label_2->setObjectName("label_2");
+
+        verticalLayout_4->addWidget(label_2);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -498,6 +516,9 @@ public:
         LabelCalcul->setText(QString());
         LabelResult->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Calculatrice", nullptr));
+        pushButtonExportHistori->setText(QCoreApplication::translate("MainWindow", "Export Historique", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Historique", nullptr));
     } // retranslateUi
 

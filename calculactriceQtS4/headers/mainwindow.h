@@ -21,10 +21,12 @@ public:
 
 private slots:
     void onPushButtonOClicked(const QString& buttonText);
+    void onPushButtonExportClicked();
 
 
 private:
     Ui::MainWindow *ui;
+    QVector<QString> HistoriqueTab;
 };
 
 bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere);
