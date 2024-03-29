@@ -2,8 +2,11 @@
 #include "ui_mainwindow.h"
 #include "muParser.h"
 #include <iostream>
+
 #include <QRegularExpression>
 #include <QString>
+#include <QLabel>
+#include <QVBoxLayout>
 
 using namespace std;
 
@@ -93,7 +96,6 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
         currentText.clear();
         resultText.clear();
     } else if (buttonText == "Exp") {
-       std::cout << "Salut" << std::endl;
     } else if (buttonText == "=") {
         mu::Parser parser;
         parser.SetExpr(currentText.toStdString());
@@ -101,6 +103,7 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
             double result = parser.Eval();
             std::cout << "Le résultat de l'expression est : " << result << std::endl;
             resultText = QString::number(result);
+            addInHistorique(currentText, QString::number(result), *ui);
         } catch (mu::Parser::exception_type &e) {
             std::cout << "Erreur lors de l'évaluation de l'expression : " << e.GetMsg() << std::endl;
             resultText = "Erreur";
@@ -113,6 +116,32 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
 
     ui->LabelResult->setText(resultText);
     ui->LabelCalcul->setText(currentText);
+}
+
+void addInHistorique(const QString &expression, const QString &result, const Ui::MainWindow ui) {
+    QLabel *expressionLabel = new QLabel(expression);
+    QLabel *resultLabel = new QLabel("=> "+result);
+
+    QWidget *scrollAreaWidgetContents = ui.scrollAreaWidgetContents;
+
+    // ajoute un layout vertical s'il n'existe pas
+    QVBoxLayout *scrollAreaLayout = dynamic_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+    if (!scrollAreaLayout) {
+        scrollAreaLayout = new QVBoxLayout(scrollAreaWidgetContents);
+        scrollAreaWidgetContents->setLayout(scrollAreaLayout);
+    }
+
+    scrollAreaLayout->addWidget(expressionLabel);
+    scrollAreaLayout->addWidget(resultLabel);
+
+    // Ajouter un séparateur entre chaque duo de QLabel
+    QFrame *line = new QFrame();
+    line->setFrameShape(QFrame::HLine);
+    line->setFrameShadow(QFrame::Sunken);
+    scrollAreaLayout->addWidget(line);
+
+    // Activer la possibilité de redimensionner le widget contenu du QScrollArea
+    //ui.scrollArea->setWidgetResizable(true);
 }
 
 bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere) {

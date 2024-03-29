@@ -1,8 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-using namespace std;
-
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -30,5 +28,6 @@ private:
 };
 
 bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere);
+void addInHistorique(const QString &expression, const QString &result, const Ui::MainWindow ui);
 
 #endif // MAINWINDOW_H
