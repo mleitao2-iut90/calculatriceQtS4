@@ -22,6 +22,7 @@ public:
 private slots:
     void onPushButtonOClicked(const QString& buttonText);
     void onPushButtonExportClicked();
+    void onPushButtonDeleteClicked();
 
 
 private:

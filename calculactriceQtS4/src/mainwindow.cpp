@@ -130,6 +130,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButtonExportHistori, &QPushButton::clicked, this, [=](){
         onPushButtonExportClicked();
     });
+
+    connect(ui->pushButtonDelete, &QPushButton::clicked, this, [=](){
+        onPushButtonDeleteClicked();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -169,6 +173,15 @@ void MainWindow::onPushButtonExportClicked() {
                 std::cerr << "Impossible d'ouvrir le fichier en écriture." << std::endl;
             }
         }
+    }
+}
+
+void MainWindow::onPushButtonDeleteClicked() {
+    HistoriqueTab.clear();
+    QLayout *layout = ui->scrollAreaWidgetContents->layout();
+    while (QLayoutItem *item = layout->takeAt(0)) {
+        delete item->widget();
+        delete item;
     }
 }
 
