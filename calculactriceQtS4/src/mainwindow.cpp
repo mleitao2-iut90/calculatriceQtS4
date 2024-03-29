@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButtonE->setVisible(false);
     ui->pushButtonLn->setVisible(false);
     ui->pushButtonLog->setVisible(false);
+    ui->pushButtonDel1->setVisible(false);
 
 
     connect(ui->pushButton0, &QPushButton::clicked, this, [=](){
@@ -118,6 +119,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButtonSqrt, &QPushButton::clicked, this, [=](){
         onPushButtonOClicked(ui->pushButtonSqrt->text());
     });
+    connect(ui->pushButtonDel1, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonDel1->text());
+    });
 }
 
 MainWindow::~MainWindow()
@@ -145,6 +149,7 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
         ui->pushButtonE->setVisible(!status);
         ui->pushButtonLn->setVisible(!status);
         ui->pushButtonLog->setVisible(!status);
+        ui->pushButtonDel1->setVisible(!status);
     } else if (buttonText == "=") {
         mu::Parser parser;
         parser.DefineFun("log", [](double a) { return log10(a); });
@@ -158,6 +163,11 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
             std::cout << "Erreur lors de l'évaluation de l'expression : " << e.GetMsg() << std::endl;
             resultText = "Erreur";
         }
+    } else if(buttonText == "<=") {
+        if(!currentText.isEmpty()) {
+            currentText.chop(1);
+        }
+
     } else {
         if(peutAjouterCaractere(currentText, buttonText)) {
             if(buttonText == "sin" || buttonText == "cos" || buttonText == "tan" || buttonText == "log"
@@ -244,7 +254,7 @@ bool peutAjouterCaractere(const QString &expression, const QString &prochainCara
         // Si le dernier caractère est un chiffre, le prochain caractère peut être un opérateur, une parenthèse, un point décimal, un exposant, une fonction trigonométrique, la constante e, une fonction logarithmique ou une racine carrée
         return prochainCaractere == "+" || prochainCaractere == "-" ||
                prochainCaractere == "*" || prochainCaractere == "/" ||
-               prochainCaractere == "." || prochainCaractere == "(" ||
-               prochainCaractere.at(0).isDigit() || prochainCaractere == "x^(y)"|| prochainCaractere == "x^(2)" || prochainCaractere == ")";
+               prochainCaractere == "." || prochainCaractere == ")" ||
+               prochainCaractere.at(0).isDigit() || prochainCaractere == "x^(y)"|| prochainCaractere == "x^(2)";
     }
 }

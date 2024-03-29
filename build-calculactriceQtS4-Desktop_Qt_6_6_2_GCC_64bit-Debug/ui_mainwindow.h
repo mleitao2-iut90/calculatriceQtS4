@@ -62,6 +62,7 @@ public:
     QPushButton *pushButtonPuissanceY;
     QPushButton *pushButtonPuissance2;
     QPushButton *pushButtonSqrt;
+    QPushButton *pushButtonDel1;
     QVBoxLayout *verticalLayout;
     QLabel *LabelCalcul;
     QLabel *LabelResult;
@@ -310,6 +311,13 @@ public:
 
         gridLayout_3->addWidget(pushButtonSqrt, 5, 0, 1, 1);
 
+        pushButtonDel1 = new QPushButton(tab);
+        pushButtonDel1->setObjectName("pushButtonDel1");
+        sizePolicy.setHeightForWidth(pushButtonDel1->sizePolicy().hasHeightForWidth());
+        pushButtonDel1->setSizePolicy(sizePolicy);
+
+        gridLayout_3->addWidget(pushButtonDel1, 0, 0, 1, 1);
+
 
         gridLayout_2->addLayout(gridLayout_3, 1, 0, 1, 1);
 
@@ -443,6 +451,9 @@ public:
         pushButton1->setShortcut(QCoreApplication::translate("MainWindow", "1", nullptr));
 #endif // QT_CONFIG(shortcut)
         pushButtonExp->setText(QCoreApplication::translate("MainWindow", "Exp", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonExp->setShortcut(QCoreApplication::translate("MainWindow", "Space", nullptr));
+#endif // QT_CONFIG(shortcut)
         pushButton5->setText(QCoreApplication::translate("MainWindow", "5", nullptr));
 #if QT_CONFIG(shortcut)
         pushButton5->setShortcut(QCoreApplication::translate("MainWindow", "5", nullptr));
@@ -480,6 +491,10 @@ public:
         pushButtonPuissanceY->setText(QCoreApplication::translate("MainWindow", "x^(y)", nullptr));
         pushButtonPuissance2->setText(QCoreApplication::translate("MainWindow", "x^(2)", nullptr));
         pushButtonSqrt->setText(QCoreApplication::translate("MainWindow", "sqrt", nullptr));
+        pushButtonDel1->setText(QCoreApplication::translate("MainWindow", "<=", nullptr));
+#if QT_CONFIG(shortcut)
+        pushButtonDel1->setShortcut(QCoreApplication::translate("MainWindow", "Backspace", nullptr));
+#endif // QT_CONFIG(shortcut)
         LabelCalcul->setText(QString());
         LabelResult->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
