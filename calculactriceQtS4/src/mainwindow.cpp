@@ -20,6 +20,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tabWidget->setMovable(true);
 
+    ui->pushButtonSqrt->setVisible(false);
+    ui->pushButtonSin->setVisible(false);
+    ui->pushButtonCos->setVisible(false);
+    ui->pushButtonTan->setVisible(false);
+    ui->pushButtonPuissanceY->setVisible(false);
+    ui->pushButtonPuissance2->setVisible(false);
+    ui->pushButtonE->setVisible(false);
+    ui->pushButtonLn->setVisible(false);
+    ui->pushButtonLog->setVisible(false);
+
+
     connect(ui->pushButton0, &QPushButton::clicked, this, [=](){
         onPushButtonOClicked(ui->pushButton0->text());
     });
@@ -80,6 +91,33 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButtonVirgule, &QPushButton::clicked, this, [=](){
         onPushButtonOClicked(ui->pushButtonVirgule->text());
     });
+    connect(ui->pushButtonTan, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonTan->text());
+    });
+    connect(ui->pushButtonSin, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonSin->text());
+    });
+    connect(ui->pushButtonCos, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonCos->text());
+    });
+    connect(ui->pushButtonE, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonE->text());
+    });
+    connect(ui->pushButtonLog, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonLog->text());
+    });
+    connect(ui->pushButtonLn, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonLn->text());
+    });
+    connect(ui->pushButtonPuissanceY, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonPuissanceY->text());
+    });
+    connect(ui->pushButtonPuissance2, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonPuissance2->text());
+    });
+    connect(ui->pushButtonSqrt, &QPushButton::clicked, this, [=](){
+        onPushButtonOClicked(ui->pushButtonSqrt->text());
+    });
 }
 
 MainWindow::~MainWindow()
@@ -96,8 +134,20 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
         currentText.clear();
         resultText.clear();
     } else if (buttonText == "Exp") {
+        bool status = ui->pushButtonSin->isVisible();
+
+        ui->pushButtonSqrt->setVisible(!status);
+        ui->pushButtonSin->setVisible(!status);
+        ui->pushButtonCos->setVisible(!status);
+        ui->pushButtonTan->setVisible(!status);
+        ui->pushButtonPuissanceY->setVisible(!status);
+        ui->pushButtonPuissance2->setVisible(!status);
+        ui->pushButtonE->setVisible(!status);
+        ui->pushButtonLn->setVisible(!status);
+        ui->pushButtonLog->setVisible(!status);
     } else if (buttonText == "=") {
         mu::Parser parser;
+        parser.DefineFun("log", [](double a) { return log10(a); });
         parser.SetExpr(currentText.toStdString());
         try {
             double result = parser.Eval();
@@ -110,7 +160,16 @@ void MainWindow::onPushButtonOClicked(const QString& buttonText)
         }
     } else {
         if(peutAjouterCaractere(currentText, buttonText)) {
-            currentText +=  buttonText;
+            if(buttonText == "sin" || buttonText == "cos" || buttonText == "tan" || buttonText == "log"
+                || buttonText == "ln" || buttonText == "sqrt"){
+                currentText +=  buttonText+"(";
+            }else if(buttonText == "x^(y)"){
+                currentText += "^(";
+            }else if(buttonText == "x^(2)"){
+                currentText += "^(2)";
+            }else {
+                currentText +=  buttonText;
+            }
         }
     }
 
@@ -139,45 +198,53 @@ void addInHistorique(const QString &expression, const QString &result, const Ui:
     line->setFrameShape(QFrame::HLine);
     line->setFrameShadow(QFrame::Sunken);
     scrollAreaLayout->addWidget(line);
-
-    // Activer la possibilité de redimensionner le widget contenu du QScrollArea
-    //ui.scrollArea->setWidgetResizable(true);
 }
 
 bool peutAjouterCaractere(const QString &expression, const QString &prochainCaractere) {
-    // Vérifier que le prochain caractère est valide
-    QRegularExpression re("^[-+/*().0-9]+$");
-    if (!re.match(prochainCaractere).hasMatch()) {
-        return false;
-    }
-
-    // Si l'expression est vide, le prochain caractère peut être un chiffre, une parenthèse ouvrante ou un signe moins
+    // Si l'expression est vide, le prochain caractère peut être un chiffre, une parenthèse ouvrante,
+    // un signe moins, une fonction trigonométrique, la constante e, une fonction logarithmique ou une racine carrée
     if (expression.isEmpty()) {
-        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(" || prochainCaractere == "-";
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(" || prochainCaractere == "-" ||
+               prochainCaractere == "cos" || prochainCaractere == "sin" || prochainCaractere == "tan" ||
+               prochainCaractere == "e" || prochainCaractere == "ln" || prochainCaractere == "log" ||
+               prochainCaractere == "sqrt";
     }
 
     // Vérifier que le prochain caractère peut être ajouté à l'expression en fonction du dernier caractère de l'expression
     QString dernierCaractere = expression.right(1);
     if (dernierCaractere == "+" || dernierCaractere == "-") {
-        // Si le dernier caractère est un signe plus ou moins, le prochain caractère doit être un chiffre ou une parenthèse ouvrante
-        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(";
+        // Si le dernier caractère est un signe plus ou moins, le prochain caractère doit être un chiffre, une parenthèse ouvrante ou une fonction trigonométrique
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(" ||
+               prochainCaractere == "cos" || prochainCaractere == "sin" || prochainCaractere == "tan" ||
+               prochainCaractere == "e" || prochainCaractere == "ln" || prochainCaractere == "log" ||
+               prochainCaractere == "sqrt";
     } else if (dernierCaractere == "*" || dernierCaractere == "/") {
-        // Si le dernier caractère est un signe de multiplication ou de division, le prochain caractère doit être un chiffre ou une parenthèse ouvrante
-        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(";
+        // Si le dernier caractère est un signe de multiplication ou de division, le prochain caractère doit être un chiffre, une parenthèse ouvrante ou une fonction trigonométrique
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(" ||
+               prochainCaractere == "cos" || prochainCaractere == "sin" || prochainCaractere == "tan" ||
+               prochainCaractere == "e" || prochainCaractere == "ln" || prochainCaractere == "log" ||
+               prochainCaractere == "sqrt";
     } else if (dernierCaractere == ".") {
         // Si le dernier caractère est un point décimal, le prochain caractère doit être un chiffre
         return prochainCaractere.at(0).isDigit();
     } else if (dernierCaractere == "(") {
-        // Si le dernier caractère est une parenthèse ouvrante, le prochain caractère peut être un chiffre ou un signe moins
-        return prochainCaractere.at(0).isDigit() || prochainCaractere == "-" || prochainCaractere == "(";
+        // Si le dernier caractère est une parenthèse ouvrante, le prochain caractère peut être un chiffre, un signe moins, une fonction trigonométrique, la constante e, une fonction logarithmique ou une racine carrée
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "-" ||
+               prochainCaractere == "cos" || prochainCaractere == "sin" || prochainCaractere == "tan" ||
+               prochainCaractere == "e" || prochainCaractere == "ln" || prochainCaractere == "log" ||
+               prochainCaractere == "sqrt";
     } else if (dernierCaractere == ")") {
-        // Si le dernier caractère est une parenthèse fermante, le prochain caractère doit être un opérateur
+        // Si le dernier caractère est une parenthèse fermante, le prochain caractère doit être un opérateur, une fonction trigonométrique, la constante e, une fonction logarithmique ou une racine carrée
         return prochainCaractere == "+" || prochainCaractere == "-" ||
-               prochainCaractere == "*" || prochainCaractere == "/" || prochainCaractere == ")";
+               prochainCaractere == "*" || prochainCaractere == "/";
+    } else if (dernierCaractere == "^") {
+        // Si le dernier caractère est un exposant, le prochain caractère doit être un chiffre ou une parenthèse ouvrante
+        return prochainCaractere.at(0).isDigit() || prochainCaractere == "(";
     } else {
-        // Si le dernier caractère est un chiffre, le prochain caractère peut être un opérateur, une parenthèse ou un point décimal
+        // Si le dernier caractère est un chiffre, le prochain caractère peut être un opérateur, une parenthèse, un point décimal, un exposant, une fonction trigonométrique, la constante e, une fonction logarithmique ou une racine carrée
         return prochainCaractere == "+" || prochainCaractere == "-" ||
                prochainCaractere == "*" || prochainCaractere == "/" ||
-               prochainCaractere == "." || prochainCaractere.at(0).isDigit() || prochainCaractere == ")";
+               prochainCaractere == "." || prochainCaractere == "(" ||
+               prochainCaractere.at(0).isDigit() || prochainCaractere == "x^(y)"|| prochainCaractere == "x^(2)" || prochainCaractere == ")";
     }
 }
